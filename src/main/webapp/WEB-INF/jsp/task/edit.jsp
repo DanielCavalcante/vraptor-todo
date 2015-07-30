@@ -54,6 +54,10 @@
 					</div>
 				</div>
 			</form>
+			<hr>
+			<footer class="footer">
+				<p>&copy; Company 2014</p>
+			</footer>
 		</div>
 		<script src="${context}/js/lib/jquery-2.1.4.min.js"></script>
 		<script src="${context}/js/lib/bootstrap.min.js"></script>

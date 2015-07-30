@@ -8,6 +8,7 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import model.User;
+import model.UserSession;
 import repository.UserRepository;
 import service.UserService;
 
@@ -18,6 +19,7 @@ public class UserController {
 	@Inject private UserRepository repository;
 	@Inject private UserService service;
 	@Inject private Result result;
+	@Inject private UserSession userSession;
 	
 	@Get("/create")
 	public void create() {
@@ -33,6 +35,12 @@ public class UserController {
 		} else {
 			result.redirectTo(this).create();	
 		}
+	}
+	
+	@Get("/edit")
+	public void edit() {
+		User user = userSession.getUser();
+		result.include("user", user);
 	}
 
 }

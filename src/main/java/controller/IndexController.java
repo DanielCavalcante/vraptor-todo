@@ -26,5 +26,10 @@ public class IndexController {
 		result.include("tasks", tasks);
 		inbox.message("msg.welcome", userSession.getUser().getName()).success();
 	}
+	
+	@Get("/about")
+	public void about() {
+		
+	}
 
 }

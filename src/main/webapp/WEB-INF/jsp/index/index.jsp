@@ -3,14 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<link href="${context}/css/bootstrap.min.css" rel="stylesheet" >
-<%-- 		<link href="${context}/css/style.css" rel="stylesheet" > --%>
+		<link href="${context}/css/style.css" rel="stylesheet" >
 		<title>VRaptor TODO</title>
-		<style>
-			.centered {
-			    margin: 0 auto !important;
-			    float: none !important;
-			}
-		</style>
 	</head>
 	<body>
 		<div class="container">
@@ -19,8 +13,8 @@
 					<nav>
 						<ul class="nav nav-pills pull-right">
 							<li class="active"><a href="<c:url value="/index" />">Home</a></li>
-							<li><a href="<c:url value="/logout" />">Account</a></li>
-							<li><a href="<c:url value="/logout" />">About</a></li>
+							<li><a href="<c:url value="/users/edit" />">Account</a></li>
+							<li><a href="<c:url value="/about" />">About</a></li>
 							<li><a href="<c:url value="/logout" />">Logout</a></li>
 						</ul>
 					</nav>
