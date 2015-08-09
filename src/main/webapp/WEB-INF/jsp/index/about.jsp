@@ -17,12 +17,12 @@
 							<li><a href="<c:url value="/logout" />">Logout</a></li>
 						</ul>
 					</nav>
-					<h3 class="text-muted">System Task</h3>
+					<h3 class="text-muted"><fmt:message key="name.system" /></h3>
 					<hr>
 				</div>
 				<div class="jumbotron">
-					<h3>System Task</h3>
-					<p>O System Task, foi criado usando o VRaptor na sua última versão (4.0.0).</p>
+					<h3><fmt:message key="name.system" /></h3>
+					<p><fmt:message key="msg.about" /></p>
 				</div>
 			</div>
 		</div>

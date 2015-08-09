@@ -40,7 +40,11 @@ public class UserController {
 	@Get("/edit")
 	public void edit() {
 		User user = userSession.getUser();
-		result.include("user", user);
+		if (user != null) {
+			result.include("user", user);
+		} else {
+			result.redirectTo(LoginController.class).logout();
+		}
 	}
 
 }

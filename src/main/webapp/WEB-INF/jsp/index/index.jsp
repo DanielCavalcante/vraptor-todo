@@ -12,21 +12,21 @@
 				<div class="header clearfix" style="margin-top: 10px;">
 					<nav>
 						<ul class="nav nav-pills pull-right">
-							<li class="active"><a href="<c:url value="/index" />">Home</a></li>
-							<li><a href="<c:url value="/users/edit" />">Account</a></li>
-							<li><a href="<c:url value="/about" />">About</a></li>
-							<li><a href="<c:url value="/logout" />">Logout</a></li>
+							<li class="active"><a href="<c:url value="/index" />"><fmt:message key="menu.home" /></a></li>
+							<li><a href="<c:url value="/users/edit" />"><fmt:message key="menu.account" /></a></li>
+							<li><a href="<c:url value="/about" />"><fmt:message key="menu.about" /></a></li>
+							<li><a href="<c:url value="/logout" />"><fmt:message key="menu.logout" /></a></li>
 						</ul>
 					</nav>
-					<h3 class="text-muted">System Task</h3>
+					<h3 class="text-muted"><fmt:message key="name.system" /></h3>
 					<hr>
 				</div>
 				<msg:messages />
 				<div class="jumbotron">
 					<div class="form-inline">
 						<div class="form-group">
-							<label>Add Tasks</label>
-							<input name="task.title" value="${task.title}" id="taskTitle" placeholder="Digite your task here" class="form-control">
+							<label><fmt:message key="task.add" /></label>
+							<input name="task.title" value="${task.title}" id="taskTitle" placeholder="<fmt:message key="task.placeholder.title" />" class="form-control">
 							<a onclick="save()" class="btn btn-success">Save</a>
 						</div>
 					</div>
@@ -74,7 +74,7 @@
 						var id = res.id;
 						var content = "<td><input type='checkbox'></td>";
 						content += "<td><a href='${linkTo[TaskController].edit("+res.id+")}' style='margin-left: 5px;'>"+ $('#taskTitle').val() +"</a></td>";
-						content += "<td><a onclick=\"removeTask('"+res.id+"')\" href='javascript:void(0)' style='margin-left: 10px;'>Remover</a></td>";
+						content += "<td><a onclick=\"removeTask('"+res.id+"')\" href='javascript:void(0)' class='close'>&times;</a></td>";
 						var row = "<tr id='task_"+res.id+"'>"+ content + "</tr>";
 						$('#table').append(row);
 					} else {
