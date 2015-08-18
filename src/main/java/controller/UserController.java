@@ -11,6 +11,7 @@ import model.User;
 import model.UserSession;
 import repository.UserRepository;
 import service.UserService;
+import util.Inbox;
 
 @Controller
 @Path("/users")
@@ -20,6 +21,7 @@ public class UserController {
 	@Inject private UserService service;
 	@Inject private Result result;
 	@Inject private UserSession userSession;
+	@Inject private Inbox inbox;
 	
 	@Get("/create")
 	public void create() {
@@ -28,12 +30,17 @@ public class UserController {
 	
 	@Post("/save")
 	public void save(User user) {
-		boolean isValid = service.isValid(user);
-		if (isValid) {
-			repository.save(user);
-			result.redirectTo(LoginController.class).login();
+		if (validate(user)) {
+			boolean isValid = service.isValid(user);
+			if (isValid) {
+				repository.save(user);
+				result.redirectTo(LoginController.class).login();
+			} else {
+				result.redirectTo(this).create();	
+			}
 		} else {
-			result.redirectTo(this).create();	
+			inbox.enterRequiredFields();
+			result.redirectTo(this).create();
 		}
 	}
 	
@@ -45,6 +52,14 @@ public class UserController {
 		} else {
 			result.redirectTo(LoginController.class).logout();
 		}
+	}
+	
+	
+	private boolean validate(User user) {
+		return !(user.getName() != null) &&
+				(user.getEmail() != null) &&
+				(user.getPassword() != null) &&
+				(user.getConfirmPassword() != null);
 	}
 
 }

@@ -26,6 +26,7 @@
 				<form action="<c:url value="/users/save"></c:url>" method="post" class="form-horizontal">
 					<input type="hidden" name="user.id" value="${user.id}" id="userId">
 					<div class="col-md-12">
+						<msg:messages />
 						<h3><fmt:message key="msg.create.new.accout" /></h3>
 						<div class="row">
 							<div class="col-md-8">

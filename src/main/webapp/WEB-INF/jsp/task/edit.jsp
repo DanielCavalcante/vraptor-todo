@@ -34,7 +34,7 @@
 									<input name="task.createdOn" placeholder="<fmt:formatDate pattern="dd/MM/yyyy" value="${task.createdOn}"/>" type="text" disabled class="form-control">
 								</div>
 								<div class="col-md-8">
-									<input name="task.done" value="${task.done}" type="checkbox">
+									<input name="task.done" value="${task.done}" checked="${task.done}" type="checkbox">
 									<label><fmt:message key="task.done" /></label>
 								</div>
 							</div>

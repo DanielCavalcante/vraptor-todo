@@ -13,8 +13,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-public abstract class GenericBusiness<T extends AbstractEntity> implements
-		GenericRepository<T> {
+public abstract class GenericBusiness<T extends AbstractEntity> implements GenericRepository<T> {
 
 	@Inject protected EntityManager manager;
 	protected final Class<T> clazz;
@@ -26,26 +25,22 @@ public abstract class GenericBusiness<T extends AbstractEntity> implements
 		this.clazz = clazz;
 	}
 
-	@Override
+	@SuppressWarnings("unchecked")
 	public Collection<T> list() {
 		Query query = manager.createQuery("from " + clazz.getName());
 
-		@SuppressWarnings("unchecked")
 		Collection<T> list = query.getResultList();
 		return list;
 	}
 
-	@Override
 	public T find(Long id) {
 		return manager.find(clazz, id);
 	}
 
-	@Override
 	public void remove(T entity) {
 		manager.remove(manager.getReference(clazz, entity.getId()));
 	}
 
-	@Override
 	public T save(T entity) {
 		if (entity.getId() == null) {
 			manager.persist(entity);
@@ -54,18 +49,15 @@ public abstract class GenericBusiness<T extends AbstractEntity> implements
 		return manager.merge(entity);
 	}
 
-	@Override
 	public void delete(Long id) {
 		manager.remove(find(id));
 	}
 
-	@Override
 	@SuppressWarnings("rawtypes")
 	public Criteria createCriteria(Class clazz) {
 		return ((Session) manager.getDelegate()).createCriteria(clazz);
 	}
 
-	@Override
 	@SuppressWarnings("rawtypes")
 	public List findLike(Class clazz, String fieldName) {
 		Criteria c = createCriteria(clazz);
@@ -73,7 +65,6 @@ public abstract class GenericBusiness<T extends AbstractEntity> implements
 		return c.list();
 	}
 
-	@Override
 	@SuppressWarnings("rawtypes")
 	public List find(Class clazz, Map<String, Object> map) {
 		Criteria c = createCriteria(clazz);
@@ -81,6 +72,14 @@ public abstract class GenericBusiness<T extends AbstractEntity> implements
 			c.add(Restrictions.eq(key, map.get(key)));
 		}
 		return c.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<T> listOrder() {
+		Query query = manager.createQuery("from " + clazz.getName() + " order by id");
+		Collection<T> list = query.getResultList();
+		return list;
 	}
 
 }

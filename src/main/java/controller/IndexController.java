@@ -22,9 +22,13 @@ public class IndexController {
 	
 	@Get("/index")
 	public void index() {
-		List<Task> tasks = (List<Task>) taskRepository.list();
+		List<Task> tasks = (List<Task>) taskRepository.listOrder();
 		result.include("tasks", tasks);
-		inbox.message("msg.welcome", userSession.getUser().getName()).success();
+		if (userSession.getUser() != null) {
+			inbox.message("msg.welcome", userSession.getUser().getName()).success();
+		} else {
+			result.redirectTo(LoginController.class).logout();
+		}
 	}
 	
 	@Get("/about")

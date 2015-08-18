@@ -10,6 +10,8 @@ public interface GenericRepository<T extends AbstractEntity> {
 
 	public abstract Collection<T> list();
 
+	public abstract Collection<T> listOrder();
+
 	public abstract T find(Long id);
 
 	public abstract void remove(T entity);
